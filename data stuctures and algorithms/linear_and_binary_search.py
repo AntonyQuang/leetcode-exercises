@@ -59,11 +59,12 @@ def linear_search(cards, query):
     return -1
 
 
-# for case in tests:
-#     answer = linear_search(case["input"]["cards"], case["input"]["query"])
-#     print(f"Looking for {case['input']['query']} in {case['input']['cards']}")
-#     print(f"Expecting {case['output']}, got {answer}")
 
+
+for case in tests:
+    answer = linear_search(case["input"]["cards"], case["input"]["query"])
+    print(f"Looking for {case['input']['query']} in {case['input']['cards']}")
+    print(f"Expecting {case['output']}, got {answer}")
 """
 Time complexity: O(n)
 Space complexity: O(1)
@@ -86,7 +87,7 @@ making a value of "first" the position after the midpoint
 
 def binary_search(cards, query):
     first = 0
-    last = len(cards)
+    last = len(cards) - 1
     while first <= last and len(cards)>0:
         midpoint = (first + last) // 2
         if cards[midpoint] == query:
@@ -104,8 +105,22 @@ for case in tests:
     answer = binary_search(case["input"]["cards"], case["input"]["query"])
     print(f"Looking for {case['input']['query']} in {case['input']['cards']}")
     print(f"Expecting {case['output']}, got {answer}")
-
 """
 Time Complexity O(logn)
 Space complexity O(n)
 """
+
+def generic_binary_search(lo, hi, condition):
+
+    while lo <= hi:
+        mid = (lo + hi) // 2
+        result = condition(mid)
+        if result == 'found':
+            return mid
+        elif result == 'left':
+            hi = mid - 1
+        else:
+            lo = mid + 1
+    return -1
+
+
