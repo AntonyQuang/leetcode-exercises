@@ -138,11 +138,11 @@ class TreeNode:
     @staticmethod
     def parse_tuple(data):
         if data is None:
-            node = TreeNode
+            node = None
         elif isinstance(data, tuple) and len(data) == 3:
             node = TreeNode(data[1])
             node.left(parse_tuple(data[0]))
-            node.right(parse_tuple(data[1]))
+            node.right(parse_tuple(data[2]))
         else:
             node = TreeNode(data)
         return node
@@ -160,7 +160,7 @@ node0.right = node2
 # tuple helper function to convert a tuple with the structure (left_subtree, key, right_subtree) into a binary tree
 
 def parse_tuple(data):
-    # isinstance() checkes if the first argument is an instance of the second argument
+    # isinstance() checks if the first argument is an instance of the second argument
     if isinstance(data, tuple) and len(data) == 3:
         node = TreeNode(data[1])
         node.left = parse_tuple(data[0])
@@ -247,3 +247,6 @@ def tree_size(node):
     if node is None:
         return 0
     return 1 + tree_size(node.left) + tree_size(node.right)
+
+
+
